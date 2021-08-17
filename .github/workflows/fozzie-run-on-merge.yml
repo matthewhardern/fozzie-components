@@ -94,6 +94,6 @@ jobs:
         - name: Chrome Version Being Used
           run: echo ${{ steps.chrome-version.outputs.CHROME_VERSION }}
         - name: Install Chomium npm Same As Output Version
-          run: yarn add chromedriver@${{ steps.chrome-version.outputs.CHROME_VERSION }}
+          run: yarn add chromedriver@92.0.1 -W
         - run: yarn test-component:chrome
         - run: yarn test-a11y:chrome
