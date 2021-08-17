@@ -22,7 +22,7 @@ jobs:
         with:
           path: |
             node_modules
-            */*/node_modules
+            */**/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - run: yarn
 
@@ -45,7 +45,7 @@ jobs:
         with:
           path: |
             node_modules
-            */*/node_modules
+            */**/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - run: ls -al
       - run: yarn build
