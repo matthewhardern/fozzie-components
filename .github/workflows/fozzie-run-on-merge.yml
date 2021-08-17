@@ -88,7 +88,12 @@ jobs:
         - run: yarn global add @vue/cli @vue/cli-service-global
         - run: yarn storybook:build
         - run: yarn storybook:serve-static &
-        - name: Chrome Version
-        - run: google-chrome --version
+        - name: Retrieve Chrome Version
+          run: echo "::set-output name=CHROME_VERSION::$(google-chrome --version)"
+          id: chrome-version
+        - name: Chrome Version Being Used
+          run: echo ${{ steps.chrome-version.outputs.CHROME_VERSION }}
+        - name: Install Chomium npm Same As Output Version
+          run: yarn add chromedriver ${{ steps.chrome-version.outputs.CHROME_VERSION }}
         - run: yarn test-component:chrome
         - run: yarn test-a11y:chrome
