@@ -73,7 +73,7 @@ jobs:
         - name: Install
           uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
           with:
-            args: yarn && yarn global add @vue/cli @vue/cli-service-global
+            args: yarn install && yarn global add @vue/cli @vue/cli-service-global
         - name: Build
           uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
           with:
