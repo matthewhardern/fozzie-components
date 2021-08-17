@@ -17,14 +17,21 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: restore lerna
+      - name: Restore Lerna
         uses: actions/cache@v2
         with:
           path: |
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore Builds
+        uses: actions/cache@v2
+        with:
+          path: |
+            */**/dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
       - run: yarn
+      - run: yarn build
 
   lint_and_test:
     needs: setup
@@ -40,19 +47,25 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: restore lerna
+      - name: Restore Lerna
         uses: actions/cache@v2
         with:
           path: |
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Restore Builds
+        uses: actions/cache@v2
+        with:
+          path: |
+            */**/dist
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
       - run: ls -al
-      - run: yarn build
       - run: yarn lint
       - run: yarn test
 
   bundlewatch:
+    needs: setup
     runs-on: ubuntu-latest
 
     strategy:
@@ -65,21 +78,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Restore Lerna
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn && yarn build
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn build
       - run: yarn bundlewatch
 
   storybook_and_e2e_tests:
+      needs: setup
       runs-on: ubuntu-latest
 
       strategy:
@@ -92,18 +102,13 @@ jobs:
           uses: actions/setup-node@v2
           with:
             node-version: ${{ matrix.node-version }}
-        - name: Get yarn cache directory path
-          id: yarn-cache-dir-path
-          run: echo "::set-output name=dir::$(yarn cache dir)"
-
-        - uses: actions/cache@v2
-          id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        - name: Restore Lerna
+          uses: actions/cache@v2
           with:
-            path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-yarn-
-        - run: yarn && yarn build
+            path: |
+              node_modules
+              */**/node_modules
+            key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
         - run: yarn global add @vue/cli @vue/cli-service-global
         - run: yarn storybook:build
         - run: yarn storybook:serve-static &
