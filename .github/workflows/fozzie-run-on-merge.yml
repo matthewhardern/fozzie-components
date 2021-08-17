@@ -42,7 +42,8 @@ jobs:
             */**/dist
           key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
       - run: yarn
-#      - run: yarn build
+        if:  ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+      - run: yarn build
 
 #  lint_and_test:
 #    needs: setup
