@@ -31,127 +31,127 @@ jobs:
             */**/dist
           key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
       - run: yarn
-      - run: yarn build
+#      - run: yarn build
 
-  lint_and_test:
-    needs: setup
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Restore Lerna
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Restore Builds
-        uses: actions/cache@v2
-        with:
-          path: |
-            */**/dist
-          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
-      - run: yarn lint
-      - run: yarn test
-
-  bundlewatch:
-    needs: setup
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Restore Lerna
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Restore Builds
-        uses: actions/cache@v2
-        with:
-          path: |
-            */**/dist
-          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
-      - run: yarn bundlewatch
-
-  storybook:
-    needs: setup
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Restore Lerna
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Restore Builds
-        uses: actions/cache@v2
-        with:
-          path: |
-            */**/dist
-          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
-      - name: Restore Storybook Static
-        uses: actions/cache@v2
-        with:
-         path: |
-           packages/storybook/storybook-static
-         key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn storybook:build
-
-  e2e_tests:
-      needs: storybook
-      runs-on: ubuntu-latest
-
-      strategy:
-        matrix:
-          node-version: [ 14.x ]
-
-      steps:
-        - uses: actions/checkout@v2
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v2
-          with:
-            node-version: ${{ matrix.node-version }}
-        - name: Restore Lerna
-          uses: actions/cache@v2
-          with:
-            path: |
-              node_modules
-              */**/node_modules
-            key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-        - run: yarn global add @vue/cli @vue/cli-service-global
-        - run: yarn storybook:serve-static &
-        - name: Retrieve Chrome Version
-          run: echo "::set-output name=CHROME_VERSION::$(google-chrome --version)"
-          id: chrome-version
-        - name: Chrome Version Being Used
-          run: echo ${{ steps.chrome-version.outputs.CHROME_VERSION }}
+#  lint_and_test:
+#    needs: setup
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node-version: [ 14.x ]
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - name: Restore Lerna
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            node_modules
+#            */**/node_modules
+#          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+#      - name: Restore Builds
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            */**/dist
+#          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
+#      - run: yarn lint
+#      - run: yarn test
+#
+#  bundlewatch:
+#    needs: setup
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node-version: [ 14.x ]
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - name: Restore Lerna
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            node_modules
+#            */**/node_modules
+#          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+#      - name: Restore Builds
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            */**/dist
+#          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
+#      - run: yarn bundlewatch
+#
+#  storybook:
+#    needs: setup
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        node-version: [ 14.x ]
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - name: Restore Lerna
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            node_modules
+#            */**/node_modules
+#          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+#      - name: Restore Builds
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            */**/dist
+#          key: ${{ runner.os }}-build-${{ hashFiles('**/src/components/*.vue','**/src/**/*.js') }}
+#      - name: Restore Storybook Static
+#        uses: actions/cache@v2
+#        with:
+#         path: |
+#           packages/storybook/storybook-static
+#         key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+#      - run: yarn storybook:build
+#
+#  e2e_tests:
+#      needs: storybook
+#      runs-on: ubuntu-latest
+#
+#      strategy:
+#        matrix:
+#          node-version: [ 14.x ]
+#
+#      steps:
+#        - uses: actions/checkout@v2
+#        - name: Use Node.js ${{ matrix.node-version }}
+#          uses: actions/setup-node@v2
+#          with:
+#            node-version: ${{ matrix.node-version }}
+#        - name: Restore Lerna
+#          uses: actions/cache@v2
+#          with:
+#            path: |
+#              node_modules
+#              */**/node_modules
+#            key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+#        - run: yarn global add @vue/cli @vue/cli-service-global
+#        - run: yarn storybook:serve-static &
+#        - name: Retrieve Chrome Version
+#          run: echo "::set-output name=CHROME_VERSION::$(google-chrome --version)"
+#          id: chrome-version
+#        - name: Chrome Version Being Used
+#          run: echo ${{ steps.chrome-version.outputs.CHROME_VERSION }}
