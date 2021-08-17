@@ -70,13 +70,6 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-        - uses: actions/cache@v2
-          id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-          with:
-            path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-yarn-
         - name: Install
           uses: ianwalter/puppeteer-container@afefc4bee7341a77baa94503da684e2895ea5d30
           with:
