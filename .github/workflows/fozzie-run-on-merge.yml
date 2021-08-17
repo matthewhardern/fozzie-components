@@ -88,7 +88,6 @@ jobs:
         - run: yarn global add @vue/cli @vue/cli-service-global
         - run: yarn storybook:build
         - run: yarn storybook:serve-static &
-        - name: Chrome Version
         - run: google-chrome --version
         - run: yarn test-component:chrome
         - run: yarn test-a11y:chrome
