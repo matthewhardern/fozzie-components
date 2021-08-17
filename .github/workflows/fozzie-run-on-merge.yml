@@ -29,12 +29,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Cache node_modules
-        id: cache-node-modules
+      - name: restore lerna
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - run: yarn
 
   lint_and_test:
@@ -63,12 +64,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Restore node_modules
-        id: cache-node-modules
+      - name: restore lerna
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node-modules-${{ hashFiles('yarn.lock') }}
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - run: yarn build
       - run: yarn lint
       - run: yarn test
