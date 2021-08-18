@@ -1,4 +1,4 @@
-name: Build and Test Components on merge
+name: Build and test Components on Merge to Master
 'on':
   push:
     branches: [github-actions]
