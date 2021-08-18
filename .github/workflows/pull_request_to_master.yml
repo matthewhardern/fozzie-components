@@ -2,6 +2,7 @@ name: Build and test Components on PR to Master
 'on':
   pull_request:
     branches: [github-actions]
+
 jobs:
   setup:
     runs-on: ubuntu-latest
