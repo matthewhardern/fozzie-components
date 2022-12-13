@@ -1481,6 +1481,11 @@
   resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
   integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
 
+"@braze/web-sdk@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-4.5.0.tgz#51ab362f9b8776a5fedfaee44fef0c6edc3c8b05"
+  integrity sha512-pRPiKcYRE5xS2fuXDahX0Fj6vmfEXx89+OFkqNR6kXoySxyxWY5qOk4fmSRsOOAO72Yx2a7z2ApsCQbkOR6ufg==
+
 "@braze/web-sdk@^4.2.1":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-4.4.0.tgz#fa64d0644f16fce4804a2fb820572c0837260959"
@@ -2772,6 +2777,15 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.2.0.tgz#aedd7ddc8b0455dcd8aefaf7ec1921df24230a0e"
   integrity sha512-gyxZTiM117xxdjJX3hYpF/m1RUtTzTI8EZ1s/axqIVGTE3/QiBd0+ElBNYg2NwJP9gPUtbHOn6U+Txs3MDjl+g==
+  dependencies:
+    "@justeattakeaway/cc-filters" "0.1.0"
+    "@justeattakeaway/cc-utils" "0.1.0"
+    lodash-es "4.17.21"
+
+"@justeattakeaway/cc-braze-adapter@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.3.0.tgz#2cbe5bcc6f6122f8176ac13a7045af558053ed87"
+  integrity sha512-uDybXmr7nax8MTMF/KJgyveZEo4Behkeh3bpC61mfuw68y3bYlhBsX0l1Jnajxijlubrj1k1zPQeoxMtPVzN+g==
   dependencies:
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"
@@ -27273,6 +27287,11 @@ uuid@8.3.2, uuid@^8.0.0, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   version "3.4.0"
